@@ -1,0 +1,30 @@
+# dependencies
+/node_modules
+
+# next.js build
+/.next
+/out
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# misc
+.DS_Store
+playwright-report
+
+test-16
+results
+test 
+# Environment Variables
+.env
+.env.local
+.env.*
+*.env
+
+#other 
+DEPLOYMENT_ENVIRONMENT_SETUP.md
+DEPLOYMENT_GUIDE.md
+SUPABASE_ERROR_FIX_SUMMARY.md
+setup-vercel-env.bat
