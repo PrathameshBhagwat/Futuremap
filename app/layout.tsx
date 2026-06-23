@@ -9,6 +9,7 @@ import { LanguageProvider } from '@/contexts/LanguageContext'
 import { Toaster } from 'react-hot-toast'
 import DemoModeBanner from '@/components/DemoModeBanner'
 import TranslationWrapper from '@/components/TranslationWrapper'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 
 export const metadata: Metadata = {
@@ -70,6 +71,7 @@ export default function RootLayout({
                   },
                 }}
               />
+              <SpeedInsights />
             </ChatProvider>
           </AuthProvider>
         </LanguageProvider>
