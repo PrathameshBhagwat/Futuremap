@@ -39,6 +39,7 @@ import InteractionErrorBoundary from '@/components/ui/InteractionErrorBoundary'
 import ExternalChatbot from '@/components/ExternalChatbot'
 import toast from 'react-hot-toast'
 import { useDashboardUpdates } from '@/lib/hooks/useRealtimeUpdates'
+import DownloadRoadmapButton from '@/components/roadmap/DownloadRoadmapButton'
 
 // Dynamically import 3D components with SSR disabled
 const RoadmapPreview3D = dynamic(() => import('@/components/dashboard/RoadmapPreview3D'), {
@@ -1217,19 +1218,26 @@ export default function EnhancedDashboard() {
                   <Target size={20} className="mr-2 text-neon-cyan" />
                   Your 3D Roadmap Preview
                 </h3>
-                <button 
-                  onClick={(e) => {
-                    e.preventDefault()
-                    e.stopPropagation()
-                    console.log('🗺️ Roadmap link clicked!')
-                    toast.success('Opening Full Roadmap')
-                    router.push('/roadmap')
-                  }}
-                  className="text-neon-cyan hover:text-white transition-colors flex items-center space-x-1"
-                >
-                  <span>Explore Full Roadmap</span>
-                  <ChevronRight size={16} />
-                </button>
+                <div className="flex items-center space-x-4">
+                  <DownloadRoadmapButton
+                    roadmapId="latest"
+                    careerGoal="Your Career"
+                    variant="secondary"
+                  />
+                  <button 
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      console.log('🗺️ Roadmap link clicked!')
+                      toast.success('Opening Full Roadmap')
+                      router.push('/roadmap')
+                    }}
+                    className="text-neon-cyan hover:text-white transition-colors flex items-center space-x-1"
+                  >
+                    <span>Explore Full Roadmap</span>
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
               </div>
               
               <WebGLErrorBoundary>
