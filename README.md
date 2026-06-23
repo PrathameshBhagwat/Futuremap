@@ -112,18 +112,15 @@ Navigate to `http://localhost:3000` to start exploring!
 
 ---
 
-## 👥 The Engineering Team
+## 👥 The Team
 
 This platform was conceptualized, designed, and engineered as a Final Year Academic Project by:
 
-| Team Member | Primary Role |
-| :--- | :--- |
-| **[Your Name]** | Full Stack Architecture & Database |
-| **[Teammate 2]** | Frontend UI/UX & 3D Visualization |
-| **[Teammate 3]** | AI Integration & Backend Logic |
-| **[Teammate 4]** | API Development & Testing |
+* **Prathamesh Bhagwat**
+* **Pradnya Gore**
+* **Omkar Chavhan**
 
-**Under the expert guidance of:** [Professor / Guide Name]
+**Under the expert guidance of:** Dr. Nilesh A. Suryawanshi
 
 ---
 
