@@ -1,124 +1,132 @@
-# 🚀 FutureMap: AI-Powered Career Advisor
+<div align="center">
+  
+# 🌌 FutureMap
+### Next-Generation AI-Powered Career Guidance & Educational Discovery
 
-> **An Intelligent Platform for Personalized Career Guidance & Educational Discovery**
+*Transforming student futures from guesswork to data-driven, personalized roadmaps.*
 
-[![Next.js](https://img.shields.io/badge/Next.js-15.0-black?logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
-[![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?logo=prisma)](https://www.prisma.io/)
-[![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?logo=supabase)](https://supabase.com/)
+[![Next.js 15](https://img.shields.io/badge/Next.js-15.0-000000?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://prisma.io)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
+[![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=threedotjs&logoColor=white)](https://threejs.org/)
 
----
-
-## 📌 Project Overview
-**FutureMap** is a comprehensive Final Year Project built to help students discover their ideal career paths. By leveraging AI algorithms and interactive visualizations, the platform transforms the often confusing journey of career planning into a clear, structured, and engaging experience.
-
----
-
-## ✨ Key Features
-
-### 🧠 Interactive Career Discovery
-* **AI-Powered Assessment Quiz**: Evaluates user interests, skills, and preferences to recommend tailored career paths.
-* **Smart Roadmap Generation**: Creates personalized, step-by-step learning roadmaps with actionable milestones.
-* **Downloadable Roadmaps**: Export your customized career journey directly to a PDF for offline tracking.
-
-### 🎮 Immersive Experience
-* **3D Career Visualizations**: Uses WebGL and Three.js to provide an interactive, visual representation of career branches and learning paths.
-* **Gamified Progress Tracking**: Earn achievements and maintain streaks as you complete learning milestones.
-
-### 🏛️ Educational Resources
-* **College Database**: Search, filter, and discover engineering and technical colleges.
-* **Resource Hub**: Access curated learning materials tailored to your specific career goals.
+</div>
 
 ---
 
-## 🛠️ Technology Stack
+## 🎯 The Vision
+**FutureMap** is an advanced Final Year Project engineered to solve one of the biggest challenges students face today: **"What should I do next?"**
+
+By fusing cutting-edge Large Language Models (LLMs), immersive 3D data visualization, and a robust scalable backend, FutureMap provides students with tailored, interactive, and highly structured career trajectories. 
+
+---
+
+## 🚀 Core Innovations & Features
+
+### 🧠 **Intelligent Career Assessment**
+* **Dynamic Analysis:** Processes user skills, academic background, and personal interests through an AI inference engine.
+* **Smart Matching:** Aligns student profiles with optimal career clusters ranging from Software Engineering to Data Science and beyond.
+
+### 🗺️ **Personalized Roadmap Engine**
+* **Step-by-step Milestones:** Generates sequential learning nodes covering foundational basics to advanced mastery.
+* **Portable PDF Export:** Seamlessly compile and download your entire career trajectory into a beautifully formatted PDF for offline tracking.
+* **Real-time Progress Sync:** Dashboard syncs instantly as you complete quizzes and achieve milestones.
+
+### 🎮 **Immersive 3D Visualizer**
+* **WebGL-Powered Trees:** Explore your career options through an interactive 3D particle and node system powered by `React Three Fiber`.
+* **Hardware-Accelerated:** Smooth 60FPS animations bringing data visualization to life.
+
+### 🏛️ **Extensive College & Resource Database**
+* **Smart Filtering:** Query our comprehensive database of engineering colleges by location, cutoff, fee structure, and ratings.
+* **Curated Knowledge Hub:** Access a library of high-quality, AI-recommended learning materials mapped directly to your active roadmap phase.
+
+---
+
+## 🏗️ System Architecture
+
+FutureMap is built on a modern, enterprise-grade technology stack ensuring security, speed, and scalability.
 
 <details>
-<summary><b>Frontend</b></summary>
+<summary><b>💻 Frontend: The Presentation Layer</b></summary>
 <br>
 
-* **Framework:** Next.js 15 (App Router)
-* **Language:** TypeScript
-* **Styling:** Tailwind CSS
-* **3D Rendering:** Three.js + React Three Fiber
-* **Icons:** Lucide React
+- **Next.js 15 (App Router):** Utilizes React Server Components for lightning-fast page loads and optimized SEO.
+- **Tailwind CSS & Framer Motion:** Provides a "Glassmorphic", futuristic dark-mode UI with fluid micro-animations.
+- **Three.js & WebGL:** Renders the complex 3D career trees directly in the browser.
 </details>
 
 <details>
-<summary><b>Backend & Database</b></summary>
+<summary><b>⚙️ Backend: The Logic Layer</b></summary>
 <br>
 
-* **Database:** PostgreSQL (hosted on Supabase)
-* **ORM:** Prisma
-* **Authentication:** Supabase Auth
-* **API:** Next.js Server Actions & API Routes
+- **Next.js API Routes:** Secure, serverless functions handling complex logic and rate-limiting.
+- **Multi-Model AI Integration:** Capable of connecting to Hugging Face, Cohere, or local LLMs for generative tasks.
+- **Puppeteer & JSPDF:** Server-side generation of high-fidelity PDF documents.
 </details>
 
 <details>
-<summary><b>AI & Integrations</b></summary>
+<summary><b>🗄️ Database: The Data Layer</b></summary>
 <br>
 
-* **AI Provider:** Multi-model support (Hugging Face, Cohere, etc.)
-* **Analytics:** Vercel Speed Insights
+- **Supabase (PostgreSQL):** A highly scalable, relational database handling user states, roadmaps, and college data.
+- **Prisma ORM:** Ensures 100% end-to-end type safety between the database and the frontend interfaces.
 </details>
 
 ---
 
-## 🚀 Getting Started
+## ⚡ Setup & Deployment
 
-### Prerequisites
-Make sure you have Node.js (v18+) and npm installed on your machine.
+Want to run FutureMap locally? Follow these steps:
 
-### Installation
+### 1️⃣ Clone & Install
+```bash
+git clone https://github.com/your-username/FutureMap.git
+cd FutureMap
+npm install
+```
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-username/FutureMap.git
-   cd FutureMap
-   ```
+### 2️⃣ Environment Configuration
+Create a `.env.local` file at the root of the project with your secure keys:
+```env
+NEXT_PUBLIC_SUPABASE_URL="your-supabase-project-url"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
+DATABASE_URL="postgresql://user:pass@host:5432/postgres"
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+# AI Provider (Optional)
+HUGGINGFACE_API_KEY="your-api-key"
+```
 
-3. **Set up environment variables:**
-   Create a `.env.local` file in the root directory and add your credentials:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-   DATABASE_URL=your_postgresql_connection_string
-   HUGGINGFACE_API_KEY=your_api_key
-   ```
+### 3️⃣ Database Initialization
+Synchronize the Prisma schema with your PostgreSQL database:
+```bash
+npx prisma db push
+```
 
-4. **Initialize the Database:**
-   Push the Prisma schema to your Supabase instance:
-   ```bash
-   npx prisma db push
-   ```
-
-5. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
-
-6. Open [http://localhost:3000](http://localhost:3000) in your browser.
+### 4️⃣ Launch the Engine
+```bash
+npm run dev
+```
+Navigate to `http://localhost:3000` to start exploring!
 
 ---
 
-## 👥 Meet the Team
+## 👥 The Engineering Team
 
-This project was developed as a Final Year Engineering Project by:
+This platform was conceptualized, designed, and engineered as a Final Year Academic Project by:
 
-* **[Your Name/Teammate 1]** - *Full Stack Developer*
-* **[Teammate 2 Name]** - *Frontend & UI/UX*
-* **[Teammate 3 Name]** - *AI & Backend Integrations*
-* **[Teammate 4 Name]** - *Database & DevOps*
+| Team Member | Primary Role |
+| :--- | :--- |
+| **[Your Name]** | Full Stack Architecture & Database |
+| **[Teammate 2]** | Frontend UI/UX & 3D Visualization |
+| **[Teammate 3]** | AI Integration & Backend Logic |
+| **[Teammate 4]** | API Development & Testing |
 
-**Guided By:** [Professor / Guide Name]
+**Under the expert guidance of:** [Professor / Guide Name]
 
 ---
 
-## 📝 License
-This project is licensed under the MIT License.
+<div align="center">
+  <p><i>"The best way to predict the future is to invent it."</i></p>
+</div>
