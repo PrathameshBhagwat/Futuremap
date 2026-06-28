@@ -90,16 +90,16 @@ export async function GET(request: NextRequest) {
           // Additional frontend properties
           ranking: Math.floor(Math.random() * 100) + 1,
           acceptanceRate: Math.floor(Math.random() * 15) + 5,
-          tuition: college?.fees || '' === 'Government' ? 'Low' : 'Moderate',
+          tuition: college?.fees || (college?.type === 'Government' ? 'Low' : 'Moderate'),
           imageUrl: `https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&sig=${saved.collegeId}`,
           programs: college?.courses || [],
           averageGPA: (Math.random() * 0.5 + 3.5).toFixed(2),
           averageSAT: Math.floor(Math.random() * 300) + 1200,
-          description: `${college?.name || ''} is a ${(college?.type || '').toLowerCase()} institution known for excellence in education.`,
+          description: `${college?.name || 'This college'} is a ${(college?.type || 'premier').toLowerCase()} institution known for excellence in education.`,
           highlights: (college?.courses || []).slice(0, 3).map((course: any) => `Strong ${course} program`),
-          campusSize: (college?.type || '') === 'Government' ? 'Large' : 'Medium',
+          campusSize: college?.type === 'Government' ? 'Large' : 'Medium',
           studentPopulation: Math.floor(Math.random() * 30000) + 5000,
-          isPublic: (college?.type || '') === 'Government',
+          isPublic: college?.type === 'Government',
           isSaved: true
         }
       }) || []
