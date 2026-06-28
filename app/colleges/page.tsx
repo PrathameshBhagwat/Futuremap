@@ -590,7 +590,7 @@ export default function CollegesPage() {
       
       if (data.success && data.savedColleges) {
         console.log('📚 Saved colleges fetched:', data.savedColleges.length)
-        setSavedColleges(data.savedColleges.map((sc: any) => sc.collegeId || sc.college_id))
+        setSavedColleges(data.savedColleges.map((sc: any) => sc.collegeId || sc.collegeId))
       }
     } catch (error) {
       console.error('❌ Error fetching saved colleges:', error)

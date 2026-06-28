@@ -146,8 +146,8 @@ export async function POST(request: NextRequest) {
         const { data: existingSave } = await supabase
           .from('saved_colleges')
           .select('id')
-          .eq('user_id', userId)
-          .eq('college_id', collegeId)
+          .eq('userId', userId)
+          .eq('collegeId', collegeId)
           .single()
 
         if (existingSave) {
@@ -167,13 +167,7 @@ export async function POST(request: NextRequest) {
         while (saveAttempts < 3) {
           const { data, error } = await supabase
             .from('saved_colleges')
-            .insert({
-              user_id: userId,
-              college_id: collegeId,
-              college_name: collegeName || 'Unknown College',
-              college_location: collegeLocation || 'Unknown Location',
-              college_type: collegeType || 'Unknown Type'
-            })
+            .insert({ userId: userId, collegeId: collegeId })
             .select()
 
           if (!error) {
@@ -225,8 +219,8 @@ export async function POST(request: NextRequest) {
         const { data: deletedRows, error } = await supabase
           .from('saved_colleges')
           .delete()
-          .eq('user_id', userId)
-          .eq('college_id', collegeId)
+          .eq('userId', userId)
+          .eq('collegeId', collegeId)
           .select()
 
         if (error) {

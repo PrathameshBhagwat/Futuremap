@@ -27,11 +27,8 @@ export async function GET(request: NextRequest) {
         .from('saved_colleges')
         .select(`
           id,
-          college_id,
-          college_name,
-          college_location,
-          college_type,
-          created_at,
+          collegeId,
+          createdAt,
           colleges (
             id,
             name,
@@ -49,8 +46,8 @@ export async function GET(request: NextRequest) {
             longitude
           )
         `)
-        .eq('user_id', userId)
-        .order('created_at', { ascending: false })
+        .eq('userId', userId)
+        .order('createdAt', { ascending: false })
 
       if (error) {
         console.error('Error fetching saved colleges:', error)
@@ -71,16 +68,16 @@ export async function GET(request: NextRequest) {
         return {
           id: saved.id,
           savedId: saved.id,
-          collegeId: saved.college_id,
-          savedAt: saved.created_at,
+          collegeId: saved.collegeId,
+          savedAt: saved.createdAt,
           
           // College details
-          name: college?.name || saved.college_name,
-          shortName: (college?.name || saved.college_name).split(' ').map((word: string) => word[0]).join(''),
-          location: college?.location || saved.college_location,
+          name: college?.name || '',
+          shortName: (college?.name || '').split(' ').map((word: string) => word[0]).join(''),
+          location: college?.location || '',
           state: college?.state || '',
           city: college?.city || '',
-          type: college?.type || saved.college_type,
+          type: college?.type || '',
           established: college?.established || new Date().getFullYear() - 50,
           website: college?.website || '#',
           courses: college?.courses || [],
@@ -93,16 +90,16 @@ export async function GET(request: NextRequest) {
           // Additional frontend properties
           ranking: Math.floor(Math.random() * 100) + 1,
           acceptanceRate: Math.floor(Math.random() * 15) + 5,
-          tuition: college?.fees || saved.college_type === 'Government' ? 'Low' : 'Moderate',
-          imageUrl: `https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&sig=${saved.college_id}`,
+          tuition: college?.fees || '' === 'Government' ? 'Low' : 'Moderate',
+          imageUrl: `https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&sig=${saved.collegeId}`,
           programs: college?.courses || [],
           averageGPA: (Math.random() * 0.5 + 3.5).toFixed(2),
           averageSAT: Math.floor(Math.random() * 300) + 1200,
-          description: `${college?.name || saved.college_name} is a ${(college?.type || saved.college_type).toLowerCase()} institution known for excellence in education.`,
+          description: `${college?.name || ''} is a ${(college?.type || '').toLowerCase()} institution known for excellence in education.`,
           highlights: (college?.courses || []).slice(0, 3).map((course: any) => `Strong ${course} program`),
-          campusSize: (college?.type || saved.college_type) === 'Government' ? 'Large' : 'Medium',
+          campusSize: (college?.type || '') === 'Government' ? 'Large' : 'Medium',
           studentPopulation: Math.floor(Math.random() * 30000) + 5000,
-          isPublic: (college?.type || saved.college_type) === 'Government',
+          isPublic: (college?.type || '') === 'Government',
           isSaved: true
         }
       }) || []
@@ -255,7 +252,7 @@ export async function POST(request: NextRequest) {
           college_location: collegeLocation,
           college_type: collegeType
         }, {
-          onConflict: 'user_id, college_id'
+          onConflict: 'userId, collegeId'
         })
         .select()
 
@@ -349,16 +346,16 @@ export async function DELETE(request: NextRequest) {
       const { data: existingCollege } = await db
         .from('saved_colleges')
         .select('college_name')
-        .eq('user_id', userId)
-        .eq('college_id', collegeId)
+        .eq('userId', userId)
+        .eq('collegeId', collegeId)
         .single()
 
       // Remove college from saved list
       const { error } = await db
         .from('saved_colleges')
         .delete()
-        .eq('user_id', userId)
-        .eq('college_id', collegeId)
+        .eq('userId', userId)
+        .eq('collegeId', collegeId)
 
       if (error) {
         console.error('Error unsaving college:', error)

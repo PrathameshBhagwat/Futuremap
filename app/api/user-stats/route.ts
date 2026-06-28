@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
         roadmapsResult
       ] = await Promise.allSettled([
         db.from('quiz_results').select('*').eq('user_id', userId),
-        db.from('saved_colleges').select('*').eq('user_id', userId),
+        db.from('saved_colleges').select('*').eq('userId', userId),
         db.from('user_skills').select('*').eq('user_id', userId),
         db.from('user_activities').select('*').eq('user_id', userId),
         db.from('user_achievements').select('*').eq('user_id', userId),

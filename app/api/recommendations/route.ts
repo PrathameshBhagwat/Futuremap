@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
       ] = await Promise.allSettled([
         db.from('users').select('*').eq('id', userId).single(),
         db.from('quiz_results').select('*').eq('user_id', userId).order('created_at', { ascending: false }).limit(5),
-        db.from('saved_colleges').select('*').eq('user_id', userId),
+        db.from('saved_colleges').select('*').eq('userId', userId),
         db.from('user_skills').select('*').eq('user_id', userId),
         db.from('user_activities').select('*').eq('user_id', userId).order('created_at', { ascending: false }).limit(20)
       ])

@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
     ] = await Promise.allSettled([
       supabaseAdmin.from('user_activities').select('type, created_at').eq('user_id', userId),
       supabaseAdmin.from('quiz_results').select('id').eq('user_id', userId),
-      supabaseAdmin.from('saved_colleges').select('id').eq('user_id', userId),
+      supabaseAdmin.from('saved_colleges').select('id').eq('userId', userId),
       supabaseAdmin.from('user_skills').select('current_level, target_level').eq('user_id', userId),
       supabaseAdmin.from('user_achievements').select('id').eq('user_id', userId),
       supabaseAdmin.from('career_roadmaps').select('progress').eq('userId', userId)
