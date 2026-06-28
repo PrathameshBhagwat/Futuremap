@@ -18,8 +18,6 @@ interface AuthProfile {
   first_name?: string
   last_name?: string
   avatar_url?: string
-  subscription_tier?: string
-  subscription_status?: string
   created_at?: string
   updated_at?: string
 }
@@ -85,6 +83,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 firstName: supabaseSession.user.user_metadata?.first_name,
                 lastName: supabaseSession.user.user_metadata?.last_name,
               })
+              setProfile({
+                id: supabaseSession.user.id,
+                email: supabaseSession.user.email || '',
+                first_name: supabaseSession.user.user_metadata?.first_name,
+                last_name: supabaseSession.user.user_metadata?.last_name,
+                full_name: `${supabaseSession.user.user_metadata?.first_name || ''} ${supabaseSession.user.user_metadata?.last_name || ''}`.trim()
+              })
               setUseAPIAuth(false)
               clearTimeout(loadingTimeout)
               setLoading(false)
@@ -104,6 +109,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           try {
             const userData = JSON.parse(userStr)
             setUser(userData)
+            setProfile({
+              id: userData.id,
+              email: userData.email,
+              first_name: userData.firstName,
+              last_name: userData.lastName,
+              full_name: `${userData.firstName || ''} ${userData.lastName || ''}`.trim()
+            })
             setSession({ token })
             setAuthCookie(token) // Restore cookie from localStorage
             setUseAPIAuth(true)
@@ -151,6 +163,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       setUser(data.user)
+      setProfile({
+        id: data.user.id,
+        email: data.user.email,
+        first_name: data.user.firstName,
+        last_name: data.user.lastName,
+        full_name: `${data.user.firstName || ''} ${data.user.lastName || ''}`.trim()
+      })
       setSession({ token: data.token })
       setUseAPIAuth(true)
       setLoading(false)
@@ -186,6 +205,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       setUser(data.user)
+      setProfile({
+        id: data.user.id,
+        email: data.user.email,
+        first_name: data.user.firstName,
+        last_name: data.user.lastName,
+        full_name: `${data.user.firstName || ''} ${data.user.lastName || ''}`.trim()
+      })
       setSession({ token: data.token })
       setUseAPIAuth(true)
       setLoading(false)

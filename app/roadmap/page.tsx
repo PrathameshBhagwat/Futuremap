@@ -201,7 +201,7 @@ function RoadmapOverview({ roadmap, onStartJourney, savedRoadmapId }: {
             </div>
             
             <ul className="space-y-3">
-              {roadmap.aiRecommendations.map((recommendation, index) => (
+              {(roadmap.aiRecommendations || []).map((recommendation, index) => (
                 <li key={index} className="flex items-start space-x-3">
                   <CheckCircle size={16} className="text-neon-cyan mt-1 flex-shrink-0" />
                   <span className="text-gray-300 text-sm">{recommendation}</span>

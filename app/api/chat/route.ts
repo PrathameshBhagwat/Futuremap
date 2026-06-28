@@ -16,17 +16,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 })
     }
 
-    // Get user subscription tier (default to free)
-    let userTier = 'free'
-    if (session?.id) {
-      const { data: profile } = await supabase
-        .from('user_profiles')
-        .select('subscription_tier')
-        .eq('id', session?.id)
-        .single()
-      
-      userTier = profile?.subscription_tier || 'free'
-    }
+    // Subscription removed, proceeding directly to AI service
 
     try {
       // Initialize Free AI Service

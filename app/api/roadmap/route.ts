@@ -37,8 +37,8 @@ export async function GET(request: NextRequest) {
       const db = process.env.NODE_ENV === 'development' ? supabaseAdmin : supabase
       const { data: roadmaps, error } = await db
         .from('career_roadmaps')
-        .select('id, userId:userid, title, description, careerGoal:careergoal, currentLevel:currentlevel, duration_months, nodes, connections, aiGenerated:aigenerated, progress, created_at, updated_at')
-        .eq('userid', userId)
+        .select('id, user_id, title, description, careerGoal:career_goal, currentLevel:current_level, duration, nodes, connections, aiGenerated:ai_generated, progress, created_at, updated_at')
+        .eq('user_id', userId)
         .order('created_at', { ascending: false })
 
       if (error) {
@@ -279,7 +279,7 @@ export async function PUT(request: NextRequest) {
           updated_at: new Date().toISOString()
         })
         .eq('id', validatedData.roadmapId)
-        .eq('userId', userId) // Ensure user can only update their own roadmaps
+        .eq('user_id', userId) // Ensure user can only update their own roadmaps
         .select('*')
         .single()
 

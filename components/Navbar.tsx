@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useAuth } from '@/contexts/AuthContext'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useRouter } from 'next/navigation'
-import LanguageSwitcher from '@/components/LanguageSwitcher'
+
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -111,20 +111,12 @@ export default function Navbar() {
       icon: BookOpen, 
       description: translations.features.learningResources.description,
       requiresAuth: false
-    },
-    { 
-      name: translations.features.subscriptionPlans.name, 
-      href: '/pricing', 
-      icon: Crown, 
-      description: translations.features.subscriptionPlans.description,
-      requiresAuth: false
     }
   ]
 
   const navItems = [
     { name: translations.nav.home, href: '/' },
-    { name: translations.nav.colleges, href: '/colleges' },
-    ...(user ? [{ name: translations.nav.pricing, href: '/pricing' }] : [])
+    { name: translations.nav.colleges, href: '/colleges' }
   ]
 
   return (
@@ -286,8 +278,7 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
             
-            {/* Language Switcher */}
-            <LanguageSwitcher />
+
             
             {/* Dashboard Link (visible only when authenticated) */}
             {!loading && user && (
@@ -308,7 +299,7 @@ export default function Navbar() {
                     onClick={(e) => {
                       e.preventDefault()
                       e.stopPropagation()
-                      console.log('👤 User dropdown clicked:', profile?.full_name || user.email)
+                      console.log('User dropdown clicked:', profile?.full_name || user.email)
                       // The dropdown will show on hover anyway, but this ensures it works on click too
                     }}
                   >
@@ -328,10 +319,6 @@ export default function Navbar() {
                       <Link href="/dashboard" className="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-800 transition-colors">
                         <Settings className="w-4 h-4 mr-2" />
                         {translations.nav.dashboard}
-                      </Link>
-                      <Link href="/subscription" className="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-800 transition-colors">
-                        <Crown className="w-4 h-4 mr-2" />
-                        {translations.dashboard.subscription}
                       </Link>
                       <button 
                         onClick={handleLogout}
@@ -493,10 +480,7 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
             
-            {/* Mobile Language Switcher */}
-            <div className="pt-4 border-t border-gray-700">
-              <LanguageSwitcher />
-            </div>
+
             
             {/* Mobile Dashboard Link */}
             {!loading && user && profile && (

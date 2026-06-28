@@ -250,8 +250,20 @@ export class FreeAIService {
         }
       };
     } catch (error: any) {
-      console.error('❌ Groq API generation error:', error)
-      return this.generateFallbackResponse(prompt)
+      console.error('❌ Groq API generation error:', error);
+      
+      // Attempt Hugging Face fallback
+      if (this.hfClient) {
+        try {
+          console.log('🔄 Groq failed. Falling back to Hugging Face API...');
+          return await this.generateWithHuggingFace(prompt, options);
+        } catch (hfError: any) {
+          console.error('❌ Hugging Face API fallback error:', hfError.message || hfError);
+        }
+      }
+      
+      // If both fail, return hardcoded generic fallback
+      return this.generateFallbackResponse(prompt);
     }
   }
 
@@ -274,6 +286,10 @@ export class FreeAIService {
         console.log(`[Validation Attempt ${attempt + 1}/${maxRetries + 1}] Generating JSON...`);
         const response = await this.generateResponse(currentPrompt, aiOptions);
         
+        if (response.provider === 'fallback') {
+          throw new Error('AI Service unavailable, returned fallback text instead of JSON.');
+        }
+
         // Use the existing repair logic as a first pass
         const repairedText = repairJSON(response.content);
         
@@ -559,6 +575,7 @@ Please provide analysis in this exact JSON structure:
     }
   ],
   "summary": {
+    "overview": "A brief 2-3 sentence overview of the candidate's profile, strengths, and career trajectory.",
     "totalExperience": "X years",
     "seniorityLevel": "junior/mid/senior",
     "primaryRole": "Main role/specialization",
@@ -612,6 +629,7 @@ Provide detailed, accurate analysis. Return ONLY valid JSON, no additional text.
         year: z.string().optional()
       })),
       summary: z.object({
+        overview: z.string().optional(),
         totalExperience: z.string(),
         seniorityLevel: z.string(),
         primaryRole: z.string(),
@@ -645,6 +663,7 @@ Provide detailed, accurate analysis. Return ONLY valid JSON, no additional text.
         skills: { technical: [], soft: [], tools: [], languages: [] },
         projects: [],
         summary: {
+          overview: 'Could not generate a comprehensive overview due to an AI service error. Please try again later.',
           totalExperience: 'Unknown',
           seniorityLevel: 'mid',
           primaryRole: 'Professional',

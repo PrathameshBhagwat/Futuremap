@@ -507,7 +507,7 @@ export default function CollegesPage() {
   const [filteredColleges, setFilteredColleges] = useState<College[]>([])
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid')
   const [selectedCollegeId, setSelectedCollegeId] = useState<string | undefined>(undefined)
-  const GOOGLE_MAPS_API_KEY = 'AIzaSyDe9PcYT1EB2-p4uumsQ4hx2jOVM61Hrow'
+  const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [savedColleges, setSavedColleges] = useState<string[]>([])
   const [loading, setLoading] = useState(true)

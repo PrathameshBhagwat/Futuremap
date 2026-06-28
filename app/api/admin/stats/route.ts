@@ -20,55 +20,18 @@ export async function GET(request: NextRequest) {
       // Get total users
       const totalUsers = await prisma.user.count()
 
-      // Get active subscriptions
-      const activeSubscriptions = await prisma.user.count({
-        where: {
-          subscriptionStatus: 'active',
-          subscriptionTier: {
-            not: 'free'
-          }
-        }
-      })
-
-      // Get tier distribution
-      const tierCounts = await prisma.user.groupBy({
-        by: ['subscriptionTier'],
-        _count: true
-      })
-
-      const tierDistribution = {
-        free: 0,
-        basic: 0,
-        premium: 0,
-        elite: 0
-      }
-
-      tierCounts.forEach(tier => {
-        if (tier.subscriptionTier in tierDistribution) {
-          tierDistribution[tier.subscriptionTier as keyof typeof tierDistribution] = tier._count
-        }
-      })
-
-      // Calculate monthly revenue (mock calculation)
-      const monthlyRevenue = 
-        tierDistribution.basic * 9.99 +
-        tierDistribution.premium * 19.99 +
-        tierDistribution.elite * 39.99
-
-      // Calculate conversion rate
-      const paidUsers = tierDistribution.basic + tierDistribution.premium + tierDistribution.elite
-      const conversionRate = totalUsers > 0 ? (paidUsers / totalUsers) * 100 : 0
-
-      // Mock churn rate (would be calculated from historical data)
-      const churnRate = 3.2
-
       return NextResponse.json({
         totalUsers,
-        activeSubscriptions,
-        monthlyRevenue: Math.round(monthlyRevenue),
-        churnRate,
-        conversionRate: Math.round(conversionRate * 100) / 100,
-        tierDistribution
+        activeSubscriptions: 0,
+        monthlyRevenue: 0,
+        churnRate: 0,
+        conversionRate: 0,
+        tierDistribution: {
+          free: totalUsers,
+          basic: 0,
+          premium: 0,
+          elite: 0
+        }
       })
 
     } catch (dbError) {
@@ -77,15 +40,15 @@ export async function GET(request: NextRequest) {
       // Return mock data for demo
       return NextResponse.json({
         totalUsers: 2847,
-        activeSubscriptions: 1456,
-        monthlyRevenue: 24150,
-        churnRate: 3.2,
-        conversionRate: 12.5,
+        activeSubscriptions: 0,
+        monthlyRevenue: 0,
+        churnRate: 0,
+        conversionRate: 0,
         tierDistribution: {
-          free: 1391,
-          basic: 743,
-          premium: 478,
-          elite: 235
+          free: 2847,
+          basic: 0,
+          premium: 0,
+          elite: 0
         }
       })
     }

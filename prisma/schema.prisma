@@ -25,15 +25,6 @@ model User {
   preferences  String? // JSON object of user preferences
   avatarConfig String? // JSON config for 3D avatar
 
-  // Subscription Management
-  subscriptionTier    String    @default("free") // free, basic, premium, elite
-  subscriptionStatus  String    @default("active") // active, canceled, expired, payment_failed
-  subscriptionStarted DateTime?
-  subscriptionExpires DateTime?
-  paymentProvider     String? // stripe, razorpay
-  customerId          String? // provider customer ID
-  subscriptionId      String? // provider subscription ID
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -41,12 +32,13 @@ model User {
   quizResults       QuizResult[]
   savedColleges     SavedCollege[]
   progress          UserProgress[]
+  userActivities    UserActivity[]
+  globalActivities  Activity[]
   roadmaps          CareerRoadmap[]
   achievements      Achievement[]
   recommendations   AIRecommendation[]
   skillAssessments  SkillAssessment[]
   chatConversations ChatConversation[]
-  subscriptions     Subscription[]
   usageMetrics      UsageMetric[]
   resumes           UserResume[]
   jobMatches        JobMatch[]
@@ -126,6 +118,36 @@ model UserProgress {
   @@map("user_progress")
 }
 
+// User Activities (Specific to User)
+model UserActivity {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  type        String
+  title       String
+  description String?
+  metadata    Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_activities")
+}
+
+// Global Activities (Dashboard feed)
+model Activity {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  type        String
+  title       String
+  description String?
+  metadata    Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("activities")
+}
+
 // Career Paths
 model CareerPath {
   id             String   @id @default(cuid())
@@ -164,8 +186,7 @@ model CareerRoadmap {
   careerGoal      String   @map("career_goal")
   currentLevel    String   @map("current_level") // beginner, intermediate, advanced
   duration_months Int      @map("duration_months") // estimated duration in months
-  nodes           String // JSON array of roadmap nodes
-  connections     String // JSON array of node connections
+  roadmapData     Json?    @map("roadmap_data") // JSON object containing nodes, phases, timeline
   progress        Float    @default(0) // completion percentage
   aiGenerated     Boolean  @default(true) @map("ai_generated")
   createdAt       DateTime @default(now()) @map("created_at")
@@ -301,58 +322,7 @@ model ChatMessage {
   @@map("chat_messages")
 }
 
-// Subscription Management
-model Subscription {
-  id              String    @id @default(cuid())
-  userId          String
-  tier            String // basic, premium, elite
-  status          String // active, canceled, expired, past_due, trialing
-  billing         String // monthly, quarterly, annual
-  amount          Float // subscription amount
-  currency        String    @default("USD")
-  paymentProvider String // stripe, razorpay
-  providerId      String // provider subscription ID
-  customerId      String // provider customer ID
-  startDate       DateTime
-  endDate         DateTime?
-  nextBilling     DateTime?
-  canceledAt      DateTime?
-  cancelReason    String?
-  metadata        String? // JSON object for additional data
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
 
-  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  payments Payment[]
-
-  @@index([userId])
-  @@index([status])
-  @@index([tier])
-  @@map("subscriptions")
-}
-
-// Payment Tracking
-model Payment {
-  id              String    @id @default(cuid())
-  subscriptionId  String
-  amount          Float
-  currency        String    @default("USD")
-  status          String // succeeded, pending, failed, refunded
-  paymentProvider String // stripe, razorpay
-  providerId      String // payment intent/transaction ID
-  paymentMethod   String? // card, wallet, etc.
-  failureReason   String?
-  refundAmount    Float?
-  refundedAt      DateTime?
-  paidAt          DateTime?
-  createdAt       DateTime  @default(now())
-
-  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
-
-  @@index([subscriptionId])
-  @@index([status])
-  @@map("payments")
-}
 
 // Usage Metrics for Billing & Analytics
 model UsageMetric {
@@ -438,20 +408,6 @@ model AnalyticsEvent {
   @@map("analytics_events")
 }
 
-// User Activities
-model UserActivity {
-  id            String   @id @default(cuid())
-  user_id       String
-  activity_type String // quiz_taken, course_started, column_saved, etc.
-  description   String?
-  metadata      String? // JSON object with additional activity details
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-
-  @@index([user_id])
-  @@index([created_at])
-  @@map("user_activities")
-}
 
 // User Skills
 model UserSkill {

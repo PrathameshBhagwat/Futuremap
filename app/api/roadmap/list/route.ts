@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
       const result = await supabaseAdmin
         .from('career_roadmaps')
         .select('*')
-        .eq('userid', session?.id)
+        .eq('user_id', session?.id)
         .order('created_at', { ascending: false })
       
       roadmaps = result.data

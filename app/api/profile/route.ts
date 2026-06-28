@@ -19,8 +19,6 @@ export async function GET(request: NextRequest) {
           email: 'demo@career-advisor.com',
           full_name: 'Demo User',
           avatar_url: null,
-          subscription_tier: 'free',
-          subscription_status: 'active',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
           demo_mode: true
@@ -47,8 +45,6 @@ export async function GET(request: NextRequest) {
                       `${session?.user_metadata?.first_name || ''} ${session?.user_metadata?.last_name || ''}`.trim() || 
                       'Demo User',
             avatar_url: session?.user_metadata?.avatar_url || null,
-            subscription_tier: 'free',
-            subscription_status: 'active',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
             demo_mode: true
@@ -109,8 +105,6 @@ export async function GET(request: NextRequest) {
                     `${session?.user_metadata?.first_name || ''} ${session?.user_metadata?.last_name || ''}`.trim() || 
                     'Demo User',
           avatar_url: session?.user_metadata?.avatar_url || null,
-          subscription_tier: 'free',
-          subscription_status: 'active',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
           demo_mode: true

@@ -60,6 +60,7 @@ interface ResumeAnalysis {
     year?: string
   }>
   summary: {
+    overview?: string
     totalExperience: string
     seniorityLevel: string
     primaryRole: string
@@ -416,6 +417,14 @@ export default function JobHuntingPage() {
                   </h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Overview */}
+                    {resumeAnalysis.summary.overview && (
+                      <div className="md:col-span-2 bg-black/20 p-6 rounded-xl">
+                        <h4 className="font-semibold text-neon-cyan mb-2">Overview</h4>
+                        <p className="text-gray-300 text-sm leading-relaxed">{resumeAnalysis.summary.overview}</p>
+                      </div>
+                    )}
+
                     {/* Summary */}
                     <div className="bg-black/20 p-6 rounded-xl">
                       <h4 className="font-semibold text-neon-cyan mb-4">Professional Summary</h4>

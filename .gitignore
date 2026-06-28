@@ -1,7 +1,7 @@
 # dependencies
 /node_modules
 
-# next.js build
+# next.js build output
 /.next
 /out
 
@@ -10,20 +10,41 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# misc
+# OS files
 .DS_Store
-playwright-report
+Thumbs.db
 
-test-16
-results
-test 
-# Environment Variables
+# Environment Variables (NEVER commit secrets)
 .env
 .env.local
+.env.production
+.env.staging
 .env.*
 *.env
 
-#other 
+# Playwright / Testing artifacts
+playwright-report
+test-results
+/test
+
+# TypeScript build cache
+tsconfig.tsbuildinfo
+
+# Local SQLite DB
+prisma/dev.db
+
+# IDE
+.vscode
+.idea
+
+# AI Agent configs
+.claude
+.agents
+
+# Scratch / temp files
+/scratch
+
+# Deprecated docs
 DEPLOYMENT_ENVIRONMENT_SETUP.md
 DEPLOYMENT_GUIDE.md
 SUPABASE_ERROR_FIX_SUMMARY.md

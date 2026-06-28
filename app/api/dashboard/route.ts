@@ -146,7 +146,7 @@ export async function GET(request: NextRequest) {
         .order('unlocked_at', { ascending: false }),
       db.from('career_roadmaps')
         .select('*')
-        .eq('userId', userId)
+        .eq('user_id', userId)
         .order('updated_at', { ascending: false })
         .limit(1)
     ])
@@ -235,7 +235,7 @@ export async function GET(request: NextRequest) {
       title: roadmaps[0].title,
       progress: roadmaps[0].progress,
       nodes: roadmaps[0].nodes || [],
-      careerGoal: roadmaps[0].careerGoal
+      career_goal: roadmaps[0].career_goal || roadmaps[0].title
     } : null
 
     const dashboardData = {
