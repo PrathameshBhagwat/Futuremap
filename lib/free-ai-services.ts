@@ -333,7 +333,7 @@ export class FreeAIService {
     }
 
     // Use specific models based on the task
-    let model = options.model || 'facebook/bart-large-cnn' // Default to text generation
+    let model = options.model || 'HuggingFaceH4/zephyr-7b-beta' // Default to text generation
     
     try {
       let result: any
@@ -354,7 +354,7 @@ export class FreeAIService {
       } else if (model.includes('bert') || model.includes('deberta')) {
         // Classification/analysis for quizzes - use text generation instead
         result = await this.hfClient.textGeneration({
-          model: 'facebook/bart-large-cnn', // Fallback to text generation
+          model: 'HuggingFaceH4/zephyr-7b-beta', // Fallback to text generation
           inputs: prompt,
           parameters: {
             max_new_tokens: options.maxTokens || 1000,
@@ -378,7 +378,7 @@ export class FreeAIService {
       } else {
         // Default text generation
         result = await this.hfClient.textGeneration({
-          model: 'facebook/bart-large-cnn',
+          model: 'HuggingFaceH4/zephyr-7b-beta',
           inputs: prompt,
           parameters: {
             max_new_tokens: options.maxTokens || 1000,

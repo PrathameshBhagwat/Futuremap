@@ -167,6 +167,7 @@ export async function POST(request: NextRequest) {
     // Create the roadmap record to match our actual table structure (using 'user_id' not 'userid')
     // Store ai_recommendations and timeline in roadmap_data instead of separate columns
     const roadmapRecord = {
+      id: `roadmap_${Date.now()}_${Math.random().toString(36).substring(7)}`,
       user_id: userId,
       title: roadmapData.title || `${careerGoal} Roadmap`,
       description: roadmapData.description || `Comprehensive roadmap to become a ${careerGoal}`,
