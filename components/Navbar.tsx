@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useAuth } from '@/contexts/AuthContext'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useRouter } from 'next/navigation'
+import LanguageSwitcher from './LanguageSwitcher'
 
 
 export default function Navbar() {
@@ -277,8 +278,8 @@ export default function Navbar() {
                 )}
               </AnimatePresence>
             </div>
-            
-
+            {/* Desktop Language Switcher */}
+            <LanguageSwitcher />
             
             {/* Dashboard Link (visible only when authenticated) */}
             {!loading && user && (
@@ -479,8 +480,10 @@ export default function Navbar() {
                 )}
               </AnimatePresence>
             </div>
-            
-
+            {/* Mobile Language Switcher */}
+            <div className="pt-4 border-t border-gray-700 px-2">
+              <LanguageSwitcher />
+            </div>
             
             {/* Mobile Dashboard Link */}
             {!loading && user && profile && (
